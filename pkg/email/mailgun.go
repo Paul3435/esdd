@@ -5,9 +5,6 @@ package email
 
 import (
 	"context"
-	"fmt"
-	"log"
-	"time"
 
 	"github.com/mailgun/mailgun-go/v4"
 )
@@ -25,13 +22,13 @@ func NewMailgunService(apiKey string) *MailgunService {
 	}
 }
 
-func (m *MailgunService) SendEmail(subject, to, body string) {
+func (m *MailgunService) SendEmail(subject, to, body string) error {
+	//Instantiate MailGun service
 	mg := mailgun.NewMailgun(m.Domain, m.APIKey)
-	//mg.SetAPIBase(m.Url)
+	//mg.SetAPIBase(m.Url)  //Necessary if the account is european
 
+	//Contents of mail
 	senderEmail := "Paul <mailgun@" + m.Domain + ">"
-	fmt.Println(senderEmail)
-
 	message := mg.NewMessage(
 		senderEmail,
 		subject,
@@ -39,14 +36,14 @@ func (m *MailgunService) SendEmail(subject, to, body string) {
 		to,
 	)
 
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
-	defer cancel()
+	//Mailgun works by enqueuing messages, and requires context as parameter.
+	ctx := context.Background()
 
-	response, id, err := mg.Send(ctx, message)
-	if err != nil {
-		fmt.Println("Response: ", response, "Id: ", id)
-		log.Fatalf("Failed to send email: %v", err)
-	} else {
-		fmt.Println("Success: ", response)
-	}
+	_, _, err := mg.Send(ctx, message)
+
+	return err
+}
+
+func (m *MailgunService) Name() string {
+	return "Mailgun"
 }
