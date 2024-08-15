@@ -28,15 +28,15 @@ func handleSendEmail(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	//Render HTML
-	renderHTML(w, "sendForm.html")
-
 	//Gather data from the form in the POST req
 	mail := &MailContent{
 		Email:   r.PostFormValue("to"),
 		Subject: r.PostFormValue("subject"),
 		Body:    r.PostFormValue("body"),
 	}
+
+	//Render HTML
+	renderHTML(w, "sendForm.html")
 
 	emailServiceManager := email.NewEmailServiceManager(email.NewSendGrid("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"), email.NewMailgunService("02057f3a67aec395a2efd2e70426f144-911539ec-96815074"))
 	emailServiceManager.SendEmail(mail.Subject, mail.Email, mail.Body)
