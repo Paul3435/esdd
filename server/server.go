@@ -6,21 +6,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-
-	"github.com/Paul3435/esdd/pkg/email"
 )
-
-type Server struct {
-	emailManager *email.EmailServiceManager
-}
-
-func NewServer(emailManager *email.EmailServiceManager) *Server {
-	return &Server{emailManager: emailManager}
-}
-
-func (s *Server) handleSendEmail(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "hello\n")
-}
 
 func landingPageHandler(w http.ResponseWriter, r *http.Request) {
 	html, err := os.ReadFile("./landingPage.html")
@@ -33,8 +19,12 @@ func landingPageHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, string(html))
 }
 
-func (s *Server) Start() {
+func handleSendEmail(w http.ResponseWriter, r *http.Request) {
+
+}
+
+func Start() {
 	http.HandleFunc("/", landingPageHandler)
-	http.HandleFunc("/send", s.handleSendEmail)
+	http.HandleFunc("/send", handleSendEmail)
 	http.ListenAndServe(":8080", nil)
 }
