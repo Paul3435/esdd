@@ -5,6 +5,7 @@ package server
 import (
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/Paul3435/esdd/pkg/email"
 )
@@ -21,7 +22,19 @@ func (s *Server) handleSendEmail(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "hello\n")
 }
 
+func landingPageHandler(w http.ResponseWriter, r *http.Request) {
+	html, err := os.ReadFile("./landingPage.html")
+	if err != nil {
+		http.Error(w, "Could not read HTML file", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	fmt.Fprint(w, string(html))
+}
+
 func (s *Server) Start() {
+	http.HandleFunc("/", landingPageHandler)
 	http.HandleFunc("/send", s.handleSendEmail)
 	http.ListenAndServe(":8080", nil)
 }
