@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/Paul3435/esdd/pkg/email"
+	"github.com/Paul3435/esdd/server"
 )
 
 func main() {
@@ -18,5 +19,8 @@ func main() {
 	// fmt.Println("ERROR FOUND:", err2)
 
 	emailServiceManager := email.NewEmailServiceManager(email.NewSendGrid("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"), email.NewMailgunService("02057f3a67aec395a2efd2e70426f144-911539ec-96815074"))
-	emailServiceManager.SendEmail("Test Subject", "paul.borjesson.sesma3435@gmail.com", "This is a test email body.")
+	// emailServiceManager.SendEmail("Test Subject", "paul.borjesson.sesma3435@gmail.com", "This is a test email body.")
+
+	server := server.NewServer(emailServiceManager)
+	server.Start()
 }
