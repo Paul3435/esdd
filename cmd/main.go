@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/Paul3435/esdd/pkg/tests"
 	"github.com/Paul3435/esdd/server"
@@ -20,10 +19,7 @@ func main() {
 	switch mode {
 	case "test":
 		tests.IntializeTests()
-	case "start":
-		server.Start()
 	default:
-		fmt.Println("Invalid mode. Please use 'test' or 'start'.")
-		os.Exit(1)
+		server.Start()
 	}
 }
