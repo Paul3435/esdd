@@ -13,6 +13,8 @@ func main() {
 	mode := flag.String("mode", "start", "Specify the mode: 'test' to run in testing mode or 'start' to run the server")
 	flag.Parse()
 
+	fmt.Println("mode", mode)
+
 	switch *mode {
 	case "test":
 		tests.IntializeTests()
