@@ -41,6 +41,8 @@ func handleSendEmail(w http.ResponseWriter, r *http.Request) {
 
 	//Get API Keys from Env
 	cfg := config.LoadEnvVariables()
+
+	//Send the emails
 	emailServiceManager := email.NewEmailServiceManager(
 		email.NewSendGrid(cfg.SendGridAPIKey),
 		email.NewMailgunService(cfg.MailgunAPIKey))

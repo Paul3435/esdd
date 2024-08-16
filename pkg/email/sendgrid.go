@@ -20,7 +20,7 @@ func NewSendGrid(apiKey string) *SendGrid {
 func (s *SendGrid) SendEmail(subject, to, body string) error {
 	//Contents of mail
 	from := mail.NewEmail("Paul Borjesson", "Paul.borjesson.sesma@gmail.com")
-	htmlContent := "<strong>and easy to do anywhere, even with Go</strong>"
+	htmlContent := "<strong>Campeao do mundo</strong>"
 	toEmail := mail.NewEmail("Paul 2", to)
 	message := mail.NewSingleEmail(from, subject, toEmail, body, htmlContent)
 
