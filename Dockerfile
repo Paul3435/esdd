@@ -11,7 +11,7 @@ RUN go mod download
 COPY . .
 
 #Build
-RUN go build -o DreamDataApp .
+RUN go build -o DreamDataApp ./cmd
 
 #Export env variables
 ENV APP_PORT=8080
