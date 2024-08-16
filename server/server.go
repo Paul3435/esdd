@@ -39,6 +39,7 @@ func handleSendEmail(w http.ResponseWriter, r *http.Request) {
 	//Render HTML
 	renderHTML(w, "sendForm.html")
 
+	//Get API Keys from Env
 	cfg := config.LoadEnvVariables()
 	emailServiceManager := email.NewEmailServiceManager(
 		email.NewSendGrid(cfg.SendGridAPIKey),
