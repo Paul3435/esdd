@@ -17,9 +17,10 @@ RUN go build -o DreamDataApp ./cmd
 ENV APP_PORT=8080
 ENV SENDGRID_API_KEY=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
 ENV MAILGUN_API_KEY=02057f3a67aec395a2efd2e70426f144-911539ec-96815074
+ENV MODE=start
 
 #Server
 EXPOSE ${APP_PORT}
 
 #Run
-CMD ["./DreamDataApp", "-mode", "start"]
+CMD ["sh", "-c", "./DreamDataApp -MODE=${MODE}"]

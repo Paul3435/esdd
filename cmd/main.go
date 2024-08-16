@@ -10,10 +10,10 @@ import (
 )
 
 func main() {
-	mode := flag.String("mode", "start", "Specify the mode: 'test' to run in testing mode or 'start' to run the server")
+	mode := flag.String("MODE", "start", "Specify the mode: 'test' to run in testing mode or 'start' to run the server")
 	flag.Parse()
 
-	fmt.Println("mode", *mode)
+	fmt.Println("MODE", *mode)
 
 	switch *mode {
 	case "test":
