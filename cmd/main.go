@@ -11,7 +11,7 @@ func main() {
 	var mode string
 
 	// Prompt the user to enter the mode
-	fmt.Println("Please specify the mode: 'test' to run in testing mode or 'start' to run the server")
+	fmt.Println("Write 'test' if you wish to enter testing mode. Else skip.")
 	fmt.Print("Enter mode: ")
 	fmt.Scanln(&mode)
 
