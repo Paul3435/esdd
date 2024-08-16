@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/Paul3435/esdd/pkg/config"
 	"github.com/Paul3435/esdd/pkg/email"
 )
 
@@ -38,7 +39,10 @@ func handleSendEmail(w http.ResponseWriter, r *http.Request) {
 	//Render HTML
 	renderHTML(w, "sendForm.html")
 
-	emailServiceManager := email.NewEmailServiceManager(email.NewSendGrid("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"), email.NewMailgunService("02057f3a67aec395a2efd2e70426f144-911539ec-96815074"))
+	cfg := config.LoadEnvVariables()
+	emailServiceManager := email.NewEmailServiceManager(
+		email.NewSendGrid(cfg.SendGridAPIKey),
+		email.NewMailgunService(cfg.MailgunAPIKey))
 	emailServiceManager.SendEmail(mail.Subject, mail.Email, mail.Body)
 }
 
