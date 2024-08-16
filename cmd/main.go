@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"os"
 
@@ -10,12 +9,15 @@ import (
 )
 
 func main() {
-	mode := flag.String("MODE", "start", "Specify the mode: 'test' to run in testing mode or 'start' to run the server")
-	flag.Parse()
+	var mode string
 
-	fmt.Println("MODE", *mode)
+	// Prompt the user to enter the mode
+	fmt.Println("Please specify the mode: 'test' to run in testing mode or 'start' to run the server")
+	fmt.Print("Enter mode: ")
+	fmt.Scanln(&mode)
 
-	switch *mode {
+	// Switch based on the user input
+	switch mode {
 	case "test":
 		tests.IntializeTests()
 	case "start":
