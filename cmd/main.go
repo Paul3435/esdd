@@ -1,19 +1,28 @@
 package main
 
 import (
-	"os"
+	"fmt"
+	"strings"
 
 	"github.com/Paul3435/esdd/pkg/tests"
 	"github.com/Paul3435/esdd/server"
 )
 
 func main() {
-	//os.Setenv("TEST_MODE", "true")
-	testing := os.Getenv("TEST_MODE")
+	var input string
+	fmt.Print("Enter 'test' to run in testing mode or 'start' to run the server: ")
+	_, err := fmt.Scanln(&input)
+	if err != nil {
+		fmt.Println("Error reading input:", err)
+		return
+	}
 
-	if testing == "true" {
+	input = strings.TrimSpace(input)
+	if strings.ToLower(input) == "test" {
 		tests.IntializeTests()
-	} else {
+	} else if strings.ToLower(input) == "start" {
 		server.Start()
+	} else {
+		fmt.Println("Invalid input. Please enter 'test' or 'start'.")
 	}
 }

@@ -18,7 +18,7 @@ func NewEmailServiceManager(providers ...EmailService) *EmailServiceManager {
 	return &EmailServiceManager{providers: providers}
 }
 
-//If a provider in the range fails, tries with the next.
+//If a provider in the range fails, tries with the next. Not implementing retry logic, as a fallback exists.
 func (m *EmailServiceManager) SendEmail(to, subject, body string) {
 	for i, provider := range m.providers {
 		err := provider.SendEmail(to, subject, body)
