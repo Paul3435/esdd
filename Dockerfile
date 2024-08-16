@@ -22,4 +22,4 @@ ENV MAILGUN_API_KEY=02057f3a67aec395a2efd2e70426f144-911539ec-96815074
 EXPOSE ${APP_PORT}
 
 #Run
-CMD ["./DreamDataApp"]
+CMD ["./DreamDataApp", "-mode", "start"]
