@@ -18,17 +18,6 @@ type EmailContent struct {
 	APIKeyMailgun  string
 }
 
-// func NewTestOnlyMail(email string, subject string, body string) *EmailContent {
-// 	cfg := config.LoadEnvVariables()
-// 	return &EmailContent{
-// 		Email:          email,
-// 		Subject:        subject,
-// 		Body:           body,
-// 		APIKeySendGrid: cfg.SendGridAPIKey,
-// 		APIKeyMailgun:  cfg.MailgunAPIKey,
-// 	}
-// }
-
 func IntializeTests() {
 	choice := -1
 	var emailContent = &EmailContent{} //empty Email Content, avoids null pointers should the user not fill the fields
